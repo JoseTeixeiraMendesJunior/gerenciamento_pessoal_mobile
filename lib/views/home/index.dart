@@ -152,7 +152,10 @@ class BodyHomeScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 19),
                             ),
-                        ...homeController.tasks.map((element) => Text(element.name ?? '')),
+                        ...homeController.tasks.map((element) => Text(element.name ?? '', style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19),)),
 
                         ],
                       ),

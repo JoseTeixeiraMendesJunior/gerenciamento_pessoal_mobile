@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
 
 class LogoWidget extends StatelessWidget {
   const LogoWidget({
@@ -129,7 +130,7 @@ class LoadWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 200,
       child: const Center(
-        child: CircularProgressIndicator(color: Colors.amber),
+        child: CircularProgressIndicator(color: GlobalColors.navy),
       ),
     );
   }
