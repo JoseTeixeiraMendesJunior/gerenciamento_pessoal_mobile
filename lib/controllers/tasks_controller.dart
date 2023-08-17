@@ -122,7 +122,7 @@ abstract class _TasksControllerBase with Store {
   IconData getStatusIcon(String status) {
     switch(status) {
       case 'todo':
-        return Icons.hourglass_empty_rounded;
+        return Icons.watch_later_rounded;
       case 'in_progress':
         return Icons.note_alt;
       case 'done':

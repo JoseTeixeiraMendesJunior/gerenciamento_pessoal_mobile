@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/shopping_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/models/shopping_list_model.dart';
+import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/widgets/comuns.dart';
 import 'package:gerenciamento_pessoal_mobile/views/shopping/form.dart';
 import 'package:gerenciamento_pessoal_mobile/views/shopping/list.dart';
@@ -33,10 +34,10 @@ class _ShoppingScreanState extends State<ShoppingScrean> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Lista de Compras'),
+              Text('Lista de Compras', style: TextStyle(color: Colors.white),),
             ],
           ),
-          backgroundColor: Colors.purple,
+          backgroundColor: GlobalColors.navy,
         ),
         body: Column(
           children: [
@@ -54,7 +55,7 @@ class _ShoppingScreanState extends State<ShoppingScrean> {
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, 
             MaterialPageRoute(builder: (context) => const ShoppingListForm())),
-          backgroundColor: Colors.purple,
+          backgroundColor: GlobalColors.navy,
           elevation: 5,
           child: const Icon(Icons.add, color: Colors.white,),
           ),
@@ -108,14 +109,14 @@ class ShoppingListElement extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.purple, width: 3),
+              border: Border.all(color: GlobalColors.navy, width: 3),
               borderRadius: BorderRadius.circular(15),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(Icons.shopping_cart_rounded, color: Colors.purple,),
+                const Icon(Icons.shopping_cart_rounded, color: GlobalColors.navy,),
                 Column(
                   children: [
                     Text(shoppingItem.name ?? ''),

@@ -75,10 +75,16 @@ class GlobalApi {
 
   //Tasks
   //todo criar model de tasks
-    Future<List<TasksModel>> getTasks() async {
+    Future<List<TasksModel>> getTasks({String? filter}) async {
     List<TasksModel> tasksModel = [];
 
-    var ret = await provider.sendGet("tasks");
+    String url = 'tasks';
+
+    if(filter != null) {
+      url += '?search=$filter';
+    }
+
+    var ret = await provider.sendGet(url);
 
     if (ret != false) {
       ret.forEach((e) => tasksModel.add(TasksModel.fromJson(e)));

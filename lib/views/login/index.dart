@@ -6,7 +6,6 @@ import 'package:gerenciamento_pessoal_mobile/views/login/register.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../resources/global_colors.dart';
-import '../../resources/global_dialogs.dart';
 import '../../resources/global_scafold.dart';
 import '../../resources/widgets/globals.dart';
 
@@ -50,21 +49,22 @@ class BodyLoginWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(bottom: 32),
-          child: LogoWidget(
-            topPadding: 0,
-          ),
-        ),
+        
         Container(
           width: double.infinity,
-          height: 400,
+          height: 500,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(30),
           ),
           child: Column(
             children: [
+              const Padding(
+                  padding: EdgeInsets.only(top: 32),
+                  child: LogoWidget(
+                    topPadding: 0,
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.only(
                     top: 64, bottom: 32, right: 32, left: 32),
@@ -104,7 +104,7 @@ class BodyLoginWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 32, right: 32, top: 32),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
                           onPressed: () {
@@ -116,17 +116,17 @@ class BodyLoginWidget extends StatelessWidget {
                           },
                           child: const Text(
                             'Cadastrar-se',
-                            style: TextStyle(color: GlobalColors.red),
-                          )),
-                      TextButton(
-                          onPressed: () {
-                            animatedDialogPadrao(
-                                context, const RememberPassword());
-                          },
-                          child: const Text(
-                            'Recuperar Senha',
                             style: TextStyle(color: GlobalColors.blue),
                           )),
+                      // TextButton(
+                      //     onPressed: () {
+                      //       animatedDialogPadrao(
+                      //           context, const RememberPassword());
+                      //     },
+                      //     child: const Text(
+                      //       'Recuperar Senha',
+                      //       style: TextStyle(color: GlobalColors.blue),
+                      //     )),
                     ],
                   ),
                 ),

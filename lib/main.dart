@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/financial_controller.dart';
+import 'package:gerenciamento_pessoal_mobile/controllers/home_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/login_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/shopping_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/shopping_list_controller.dart';
@@ -8,7 +9,6 @@ import 'package:gerenciamento_pessoal_mobile/provider/global_request.dart';
 import 'package:gerenciamento_pessoal_mobile/repositories/global_api.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_scafold.dart';
-import 'package:gerenciamento_pessoal_mobile/views/home/index.dart';
 import 'package:gerenciamento_pessoal_mobile/views/login/index.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,6 +21,7 @@ void main() async {
   getIt.registerLazySingleton<FinancialController>(() => FinancialController(),);
   getIt.registerLazySingleton<ShoppingListController>(() => ShoppingListController(),);
   getIt.registerLazySingleton<TasksController>(() => TasksController(),);
+  getIt.registerLazySingleton<HomeController>(() => HomeController(),);
   runApp(const MyApp());
 }
 
@@ -85,7 +86,7 @@ class MyApp extends StatelessWidget {
             )),
         initialRoute: '/',
         routes: {
-          '/': (context) => const HomeScreen(),//LoginView(),
+          '/': (context) => const LoginView(),
         });
   }
 }

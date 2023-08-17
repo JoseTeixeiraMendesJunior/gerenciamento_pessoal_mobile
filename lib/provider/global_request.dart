@@ -19,12 +19,12 @@ class GlobalProvider {
   }
 
   getToken() {
-    return _connection.options.headers['authorization'] = 'Bearer 32|KjL8C7GyqRAeANgee4npFN2kP2AQBxJ1avFeq9Cu';
+    // return _connection.options.headers['authorization'] = 'Bearer 32|KjL8C7GyqRAeANgee4npFN2kP2AQBxJ1avFeq9Cu';
 
-    // final loginController = GetIt.I.get<LoginController>();
+    final loginController = GetIt.I.get<LoginController>();
 
-    // debugPrint(loginController.user?.token);
-    // return _connection.options.headers['authorization'] = 'Bearer ${loginController.user?.token}';
+    debugPrint(loginController.user?.token);
+    return _connection.options.headers['authorization'] = 'Bearer ${loginController.user?.token}';
   }
 
   final String apiUrl = "http://127.0.0.1:8000/api/";

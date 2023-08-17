@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/shopping_controller.dart';
+import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
 import 'package:get_it/get_it.dart';
 
 class ShoppingListForm extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ShoppingListFormState extends State<ShoppingListForm> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
-        backgroundColor: Colors.purple,
+        backgroundColor: GlobalColors.navy,
         title: const Text('Nova Lista', style: TextStyle(color: Colors.white),),
       ),
       body: Observer(

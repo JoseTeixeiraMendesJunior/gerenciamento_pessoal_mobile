@@ -68,7 +68,7 @@ class BodyRegisterWidget extends StatelessWidget {
                   'Cadastro',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.amber,
+                    color: GlobalColors.navy,
                     fontSize: 32,
                   ),
                 ),
@@ -120,6 +120,15 @@ class BodyRegisterWidget extends StatelessWidget {
                       
                     },
                     child: const Text('Salvar'),
+                  )),
+                  Padding(
+                  padding: const EdgeInsets.only(bottom: 24),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    
+                    },
+                    child: const Text('Voltar', style: TextStyle(color: Colors.blue),),
                   )),
             ],
           ),
