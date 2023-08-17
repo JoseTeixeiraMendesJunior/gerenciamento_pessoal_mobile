@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/financial_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/login_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/shopping_controller.dart';
+import 'package:gerenciamento_pessoal_mobile/controllers/shopping_list_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/provider/global_request.dart';
 import 'package:gerenciamento_pessoal_mobile/repositories/global_api.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
@@ -17,6 +18,7 @@ void main() async {
   getIt.registerLazySingleton<LoginController>(() => LoginController());
   getIt.registerLazySingleton<ShoppingController>(() => ShoppingController());
   getIt.registerLazySingleton<FinancialController>(() => FinancialController(),);
+  getIt.registerLazySingleton<ShoppingListController>(() => ShoppingListController(),);
   runApp(const MyApp());
 }
 
