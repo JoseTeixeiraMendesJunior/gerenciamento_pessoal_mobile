@@ -24,6 +24,7 @@ class _TasksFormState extends State<TasksForm> {
   final TasksController tasksController = GetIt.I.get<TasksController>();
   DateTime? _selectedTime;
   int? groupValue;
+  int? groupStatus;
 
   @override
   void initState() {
@@ -161,14 +162,14 @@ class _TasksFormState extends State<TasksForm> {
                     CupertinoSlidingSegmentedControl<int>(
                       thumbColor: GlobalColors.navy,
                       padding: const EdgeInsets.all(4),
-                      groupValue: groupValue,
+                      groupValue: groupStatus,
                       children: {
-                        0: escalaItem('Aberto', groupValue == 0? Colors.white : Colors.black),
-                        1: escalaItem('Andamento', groupValue == 1? Colors.white : Colors.black),
-                        2: escalaItem('Finalizada', groupValue == 2? Colors.white : Colors.black),
+                        0: escalaItem('Aberto', groupStatus == 0? Colors.white : Colors.black),
+                        1: escalaItem('Andamento', groupStatus == 1? Colors.white : Colors.black),
+                        2: escalaItem('Finalizada', groupStatus == 2? Colors.white : Colors.black),
                       },
                       onValueChanged: (value) => setState(() {
-                        groupValue = value;
+                        groupStatus = value;
                         switch(value) {
                           case 0 :
                             tasksController.status.text = 'todo';
