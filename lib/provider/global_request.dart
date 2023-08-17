@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:gerenciamento_pessoal_mobile/controllers/login_controller.dart';
-import 'package:get_it/get_it.dart';
 
 import '../resources/global_colors.dart';
 import '../resources/global_scafold.dart';

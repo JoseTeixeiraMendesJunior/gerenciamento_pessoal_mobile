@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciamento_pessoal_mobile/controllers/financial_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/login_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/shopping_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/provider/global_request.dart';
@@ -15,6 +16,7 @@ void main() async {
   getIt.registerLazySingleton<GlobalApi>(() => GlobalApi());
   getIt.registerLazySingleton<LoginController>(() => LoginController());
   getIt.registerLazySingleton<ShoppingController>(() => ShoppingController());
+  getIt.registerLazySingleton<FinancialController>(() => FinancialController(),);
   runApp(const MyApp());
 }
 
