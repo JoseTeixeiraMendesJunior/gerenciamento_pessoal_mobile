@@ -31,7 +31,7 @@ class _FinancialScreenState extends State<FinancialScreen> {
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       return Scaffold(
-        backgroundColor: Colors.black87,
+        // backgroundColor: Colors.black87,
         appBar: AppBar(
           elevation: 5,
           title: const Row(
@@ -117,7 +117,7 @@ class FinancialBody extends StatelessWidget {
                           Text.rich(
                             TextSpan(
                               text: 'Receitas: ',
-                              style: const TextStyle(color: Colors.white, fontSize: 18),
+                              style: const TextStyle(color: Colors.white, fontSize: 20),
                               children: [
                                 TextSpan(
                                   text: 'R\$ ${wallet.income}',
@@ -128,7 +128,7 @@ class FinancialBody extends StatelessWidget {
                         Text.rich(
                             TextSpan(
                               text: 'Despesas: ',
-                              style: const TextStyle(color: Colors.white, fontSize: 18),
+                              style: const TextStyle(color: Colors.white, fontSize: 20),
                               children: [
                                 TextSpan(
                                   text: 'R\$ ${wallet.expense}',
@@ -208,7 +208,7 @@ class TransactionElement extends StatelessWidget {
                   children: [
                     Text(
                       transation.type == 'income' ? 'Receita' : 'Despesa',
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text.rich(
                       TextSpan(

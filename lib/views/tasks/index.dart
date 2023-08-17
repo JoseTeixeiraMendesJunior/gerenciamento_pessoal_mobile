@@ -20,6 +20,12 @@ class _TasksScreenState extends State<TasksScreen> {
   final TasksController tasksController = GetIt.I.get<TasksController>();
 
   @override
+  void initState() {
+    tasksController.getTasks();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       return Scaffold(
@@ -29,10 +35,10 @@ class _TasksScreenState extends State<TasksScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Lista de Tarefas'),
+              Text('Lista de Tarefas', style: TextStyle(color: Colors.white),),
             ],
           ),
-          backgroundColor: Colors.purple,
+          backgroundColor: GlobalColors.navy,
         ),
         body: Column(
           children: [
@@ -71,6 +77,67 @@ class TasksBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Column(
+        children: [
+          ...tasks.map((element) {
+            return TasksElement(task: element, tasksController: tasksController,);
+          })
+        ],
+      )
+    );
+  }
+}
+
+class TasksElement extends StatelessWidget {
+  const TasksElement({
+      required this.task,
+      required this.tasksController,
+      super.key
+    });
+
+  final TasksModel task;
+  final TasksController tasksController;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(8),
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => 
+              TasksForm(),));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: GlobalColors.navy, width: 3),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(Icons.shopping_cart_rounded, color: GlobalColors.aqua,),
+                Column(
+                  children: [
+                    Text(task.name ?? ''),
+                    Text.rich(
+                      TextSpan(
+                        text: 'Itens: ',
+                        children: [TextSpan(text: task.name)] 
+                      ),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await tasksController.removeShoppingList(task.id!);
+                  },
+                  icon: const Icon(Icons.delete, color: Colors.red,))
+              ],
+            )
+          ),
+        ),
+      );
   }
 }

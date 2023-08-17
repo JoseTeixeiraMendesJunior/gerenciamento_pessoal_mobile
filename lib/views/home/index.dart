@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
 import 'package:gerenciamento_pessoal_mobile/views/financial/index.dart';
 import 'package:gerenciamento_pessoal_mobile/views/shopping/index.dart';
+import 'package:gerenciamento_pessoal_mobile/views/tasks/index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BodyHomeScreen(),
           ShoppingScrean(), //market
           FinancialScreen(), // financial
-          // tasks
+          TasksScreen(), // tasks
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -45,12 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
          ),
          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Shopping'
+            label: 'Compras'
          ),
          BottomNavigationBarItem(
           icon: Icon(Icons.attach_money),
-          label: 'Financial'
-         )
+          label: 'Financeiro'
+         ),
+         BottomNavigationBarItem(
+          icon: Icon(Icons.note_alt_rounded),
+          label: 'Tarefas'
+         ),
         ]
       ),
     );
