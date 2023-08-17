@@ -65,6 +65,25 @@ mixin _$FinancialController on _FinancialControllerBase, Store {
     return _$getTransactionsAsyncAction.run(() => super.getTransactions());
   }
 
+  late final _$removeTransactionAsyncAction = AsyncAction(
+      '_FinancialControllerBase.removeTransaction',
+      context: context);
+
+  @override
+  Future removeTransaction(int id) {
+    return _$removeTransactionAsyncAction
+        .run(() => super.removeTransaction(id));
+  }
+
+  late final _$createTransactionAsyncAction = AsyncAction(
+      '_FinancialControllerBase.createTransaction',
+      context: context);
+
+  @override
+  Future createTransaction() {
+    return _$createTransactionAsyncAction.run(() => super.createTransaction());
+  }
+
   late final _$_FinancialControllerBaseActionController =
       ActionController(name: '_FinancialControllerBase', context: context);
 

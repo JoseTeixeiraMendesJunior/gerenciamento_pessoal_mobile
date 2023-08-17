@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
+import 'package:gerenciamento_pessoal_mobile/views/financial/index.dart';
 import 'package:gerenciamento_pessoal_mobile/views/shopping/index.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        
         controller: _pageController,
         onPageChanged: (index) => setState(() {
           _currentIndex = index;
@@ -24,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: const [
           BodyHomeScreen(),
           ShoppingScrean(), //market
-          // financial
+          FinancialScreen(), // financial
           // tasks
         ],
       ),
@@ -39,11 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'home'
+            label: 'Home'
          ),
          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'shopping'
+            label: 'Shopping'
+         ),
+         BottomNavigationBarItem(
+          icon: Icon(Icons.attach_money),
+          label: 'Financial'
          )
         ]
       ),

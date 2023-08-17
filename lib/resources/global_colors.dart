@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GlobalColors {
-  static const Color navy = Color(0xFF001f3f);
+  static const Color navy = Color(0xFF33008c);
   static const Color blue = Color(0xFF0074D9);
-  static const Color aqua = Color(0xFF7FDBFF);
+  static const Color aqua = Color.fromARGB(255, 26, 150, 199);
   static const Color teal = Color(0xFF39CCCC);
   static const Color purple = Color(0xFFB10DC9);
   static const Color fuchsia = Color(0xFFF012BE);

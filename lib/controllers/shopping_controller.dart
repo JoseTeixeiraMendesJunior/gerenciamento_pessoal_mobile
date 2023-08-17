@@ -61,20 +61,20 @@ abstract class _ShoppingControllerBase with Store {
       items: items.toList(),
     );
     
-    var res = method == 'create' ? 
+    ShoppingListModel res = method == 'create' ? 
     await rep.createShoppingList(data) : 
     await rep.updateShoppingList(id!, data);
 
-    if(res != false && method == 'update') {
+    if(res.id != null && method == 'update') {
       shoppingList.removeWhere((element) => element.id == data.id);
     }
 
-    if(rep is ShoppingListModel) {
-      shoppingList.insert(0, data);
+    if(res.id != null ) {
+      shoppingList.insert(0, res);
     }
     changeLoading(false);
 
-    return res != false;
+    return res.id != null;
   }
 
   @action

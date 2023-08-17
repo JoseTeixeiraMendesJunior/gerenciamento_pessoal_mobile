@@ -54,12 +54,33 @@ class BackgraoundImage extends StatelessWidget {
   }
 }
 
+class HorizontalBackgraoundImage extends StatelessWidget {
+  const HorizontalBackgraoundImage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/horizontal_gradient.jpg'),
+              fit: BoxFit.cover)),
+    );
+  }
+}
+
 class GlassEfect extends StatelessWidget {
   const GlassEfect({
     required this.bodyWidget,
+    required this.width,
     Key? key,
   }) : super(key: key);
+
   final Widget bodyWidget;
+  final num width;
 
   @override
   Widget build(BuildContext context) {
@@ -73,18 +94,18 @@ class GlassEfect extends StatelessWidget {
             child: Stack(
               children: [
                 BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                  filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                   child: Container(),
                 ),
                 Center(
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    width: MediaQuery.of(context).size.width * width,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                          Colors.white.withOpacity(0.50),
+                          Colors.white.withOpacity(0.20),
                           Colors.white.withOpacity(0.10)
                         ])),
                     child: Center(child: bodyWidget),

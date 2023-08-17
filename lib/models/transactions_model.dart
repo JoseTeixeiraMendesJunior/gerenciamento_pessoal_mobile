@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 class TransactionModel {
   int? id;
   String? description;
-  String? amount;
+  double? amount;
   String? type;
   String? date;
   String? category;

@@ -32,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Stack(
                 children: [
                   const BackgraoundImage(),
-                  GlassEfect(bodyWidget: BodyRegisterWidget())
+                  GlassEfect(width: 0.9, bodyWidget: BodyRegisterWidget())
                 ],
               ),
             ),

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/models/transactions_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/wallet.dart';
@@ -42,6 +44,52 @@ abstract class _FinancialControllerBase with Store {
     wallet = walletTemp;
 
     changeLoading(false);
+  }
+
+  @action
+  removeTransaction(int id) async {
+    changeLoading(true);
+    bool res = await rep.deleteTransactions(id);
+
+    if(res == true) {
+      WalletModel temp = wallet;
+
+      int index = transactions.indexOf((element) => element.id == id);
+
+      if(transactions[index].type == 'income') {
+        temp.income = temp.income! - transactions[index].amount!;
+      } else {
+        temp.expense = temp.expense! - transactions[index].amount!;
+      }
+
+      temp.total = temp.income! + temp.expense!;
+      wallet = temp;
+
+      transactions.removeWhere((element) => element.id == id);
+    } 
+    changeLoading(false);
+  }
+
+  @action
+  createTransaction() async {
+    changeLoading(true);
+    TransactionModel data = TransactionModel(
+      amount: double.parse(amount.text),
+      description: description.text,
+      type: type.text,
+      category: category.text,
+      date: date.text,
+    );
+
+    TransactionModel res = await rep.createTransactions(data);
+
+    if(res.id != null) {
+      transactions.insert(0, res);
+    }
+
+    changeLoading(false);
+
+    return res.id != null;
   }
 
 }

@@ -30,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
       body: Stack(
         children: [
           const BackgraoundImage(),
-          GlassEfect(bodyWidget: BodyLoginWidget())
+          GlassEfect(width: 0.9, bodyWidget: BodyLoginWidget())
         ],
       ),
     );

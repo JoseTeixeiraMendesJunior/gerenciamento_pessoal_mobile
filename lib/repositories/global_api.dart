@@ -46,27 +46,30 @@ class GlobalApi {
     var ret = await provider.sendDelete("shopping_lists/$id");
 
     return ret != false;
-
   }
 
-  Future<bool> updateShoppingList(int id, data) async {
+  Future<ShoppingListModel> updateShoppingList(int id, data) async {
     var ret = await provider.sendPut("shopping_lists/$id", data, "update");
 
-    return ret != false;
+    ShoppingListModel shopping = ShoppingListModel();
+
+    if( ret != false) {
+      shopping = ShoppingListModel.fromJson(ret);
+    }
+
+    return shopping;
   }
 
-  createShoppingList(data) async {
+  Future<ShoppingListModel>createShoppingList(data) async {
     var ret = await provider.sendPost("shopping_lists", data, "create");
     ShoppingListModel shopping = ShoppingListModel();
 
 
     if( ret != false) {
       shopping = ShoppingListModel.fromJson(ret);
-      return shopping;
     }
 
-    return false;
-
+    return shopping;
   }
 
   //Tasks
@@ -129,18 +132,16 @@ class GlobalApi {
     return ret != false;
   }
 
-  createTransactions(data) async {
+  Future<TransactionModel>createTransactions(data) async {
     var ret = await provider.sendPost("transactions", data, "create");
     TransactionModel transaction = TransactionModel();
 
 
     if( ret != false) {
       transaction = TransactionModel.fromJson(ret);
-      return transaction;
     }
 
-    return false;
-
+    return transaction;
   }
 
   getWallet() async {
