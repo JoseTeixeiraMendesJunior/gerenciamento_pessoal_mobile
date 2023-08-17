@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/login_controller.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,9 +19,12 @@ class GlobalProvider {
   }
 
   getToken() {
-    final loginController = GetIt.I.get<LoginController>();
+    return _connection.options.headers['authorization'] = 'Bearer 32|KjL8C7GyqRAeANgee4npFN2kP2AQBxJ1avFeq9Cu';
 
-    return _connection.options.headers['authorization'] = 'Bearer ${loginController.user?.token}';
+    // final loginController = GetIt.I.get<LoginController>();
+
+    // debugPrint(loginController.user?.token);
+    // return _connection.options.headers['authorization'] = 'Bearer ${loginController.user?.token}';
   }
 
   final String apiUrl = "http://127.0.0.1:8000/api/";
@@ -39,6 +43,7 @@ class GlobalProvider {
       _showMessage(requestType, type: "success");
       return response.data;
     } on DioError catch (e) {
+      debugPrint(e.response.toString());
       Exception(e.response);
       _showMessage(e.response?.data['message'] ?? "Error", type: "error");
       return false;
@@ -51,9 +56,10 @@ class GlobalProvider {
       String endPoint = apiUrl + route;
 
       var response = await _connection.get(endPoint);
-
+      debugPrint(response.toString());
       return response.data;
     } on DioError catch (e) {
+      debugPrint(e.response.toString());
       Exception(e.response);
       _showMessage(e.response?.data['message'] ?? "Error", type: "error");
       return false;

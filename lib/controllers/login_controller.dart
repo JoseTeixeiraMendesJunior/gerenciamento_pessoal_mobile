@@ -4,7 +4,6 @@ import 'package:gerenciamento_pessoal_mobile/repositories/global_api.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
-import 'package:mobx/mobx.dart';
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;
@@ -38,7 +37,6 @@ abstract class _LoginControllerBase with Store {
       "password": password.text 
     };
     try {
-      print({name.text, password.text});
       UserModel res = await rep.login(data);
       user = res;
     }catch(e) {

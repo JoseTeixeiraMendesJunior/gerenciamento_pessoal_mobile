@@ -32,7 +32,9 @@ class GlobalApi {
     List<ShoppingListModel> shoppingListModel = [];
 
     var ret = await provider.sendGet("shopping_lists");
-
+    // debugPrint('-------------------');
+    // debugPrint(ret.toString());W
+    // debugPrint('-------------------');
     if (ret != false) {
       ret.forEach((e) => shoppingListModel.add(ShoppingListModel.fromJson(e)));
     }

@@ -80,6 +80,7 @@ class BodyLoginWidget extends StatelessWidget {
                   decoration: const InputDecoration(hintText: 'Senha'),
                   controller: loginController.password,
                   textInputAction: TextInputAction.done,
+                  obscureText: true,
                 ),
               ),
               Padding(

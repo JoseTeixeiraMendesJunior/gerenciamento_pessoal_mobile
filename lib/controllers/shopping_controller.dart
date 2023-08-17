@@ -27,7 +27,7 @@ abstract class _ShoppingControllerBase with Store {
   ObservableList<ShoppingListModel> shoppingList = ObservableList<ShoppingListModel>();
 
   @observable
-  List<Items> items = [];
+  ObservableList<Items> items = ObservableList<Items>();
 
   @action
   addItem() {
@@ -58,7 +58,7 @@ abstract class _ShoppingControllerBase with Store {
     ShoppingListModel data = ShoppingListModel(
       id: id,
       name: name.text,
-      items: items,
+      items: items.toList(),
     );
     
     var res = method == 'create' ? 
@@ -73,6 +73,17 @@ abstract class _ShoppingControllerBase with Store {
       shoppingList.insert(0, data);
     }
     changeLoading(false);
+
+    return res != false;
+  }
+
+  @action
+  removeShoppingList(int id) async {
+    changeLoading(true);
+    bool res = await rep.deleteShoppingList(id);
+    changeLoading(false);
+    shoppingList.removeWhere((element) => element.id == id);
+    return res;
   }
 
 
@@ -80,6 +91,6 @@ abstract class _ShoppingControllerBase with Store {
     name.clear();
     itemName.clear();
     itemQuantity.clear();
-    items = [];
+    items = ObservableList<Items>();
   }
 }

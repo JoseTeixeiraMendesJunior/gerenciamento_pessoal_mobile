@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/controllers/login_controller.dart';
+import 'package:gerenciamento_pessoal_mobile/controllers/shopping_controller.dart';
 import 'package:gerenciamento_pessoal_mobile/provider/global_request.dart';
 import 'package:gerenciamento_pessoal_mobile/repositories/global_api.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
@@ -13,7 +14,7 @@ void main() async {
   getIt.registerLazySingleton<GlobalProvider>(() => GlobalProvider());
   getIt.registerLazySingleton<GlobalApi>(() => GlobalApi());
   getIt.registerLazySingleton<LoginController>(() => LoginController());
-  // getIt.registerLazySingleton<HomeController>(() => HomeController());
+  getIt.registerLazySingleton<ShoppingController>(() => ShoppingController());
   runApp(const MyApp());
 }
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          useMaterial3: true,
             fontFamily: 'Montserrat',
             primaryColor: GlobalColors.maroon,
             scaffoldBackgroundColor: GlobalColors.white,
@@ -75,7 +77,7 @@ class MyApp extends StatelessWidget {
             )),
         initialRoute: '/',
         routes: {
-          '/': (context) => const LoginView(),
+          '/': (context) => const HomeScreen(),//LoginView(),
         });
   }
 }

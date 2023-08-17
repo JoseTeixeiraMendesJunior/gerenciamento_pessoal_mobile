@@ -45,13 +45,13 @@ mixin _$ShoppingController on _ShoppingControllerBase, Store {
       Atom(name: '_ShoppingControllerBase.items', context: context);
 
   @override
-  List<Items> get items {
+  ObservableList<Items> get items {
     _$itemsAtom.reportRead();
     return super.items;
   }
 
   @override
-  set items(List<Items> value) {
+  set items(ObservableList<Items> value) {
     _$itemsAtom.reportWrite(value, super.items, () {
       super.items = value;
     });
@@ -71,6 +71,16 @@ mixin _$ShoppingController on _ShoppingControllerBase, Store {
   @override
   Future saveItem(String method, {int? id}) {
     return _$saveItemAsyncAction.run(() => super.saveItem(method, id: id));
+  }
+
+  late final _$removeShoppingListAsyncAction = AsyncAction(
+      '_ShoppingControllerBase.removeShoppingList',
+      context: context);
+
+  @override
+  Future removeShoppingList(int id) {
+    return _$removeShoppingListAsyncAction
+        .run(() => super.removeShoppingList(id));
   }
 
   late final _$_ShoppingControllerBaseActionController =
