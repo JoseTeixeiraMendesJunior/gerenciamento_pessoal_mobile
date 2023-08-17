@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/models/transactions_model.dart';
+import 'package:gerenciamento_pessoal_mobile/models/wallet.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
@@ -27,5 +28,20 @@ abstract class _FinancialControllerBase with Store {
 
   @observable
   ObservableList<TransactionModel> transactions = ObservableList<TransactionModel>();
+
+  @observable
+  WalletModel wallet = WalletModel();
+
+  @action
+  getTransactions() async {
+    changeLoading(true);
+    List<TransactionModel> temp = await rep.getTransactions();
+    transactions = temp.asObservable();
+
+    WalletModel walletTemp = await rep.getWallet();
+    wallet = walletTemp;
+
+    changeLoading(false);
+  }
 
 }

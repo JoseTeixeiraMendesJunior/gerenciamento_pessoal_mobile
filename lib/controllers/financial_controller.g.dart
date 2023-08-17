@@ -41,6 +41,30 @@ mixin _$FinancialController on _FinancialControllerBase, Store {
     });
   }
 
+  late final _$walletAtom =
+      Atom(name: '_FinancialControllerBase.wallet', context: context);
+
+  @override
+  WalletModel get wallet {
+    _$walletAtom.reportRead();
+    return super.wallet;
+  }
+
+  @override
+  set wallet(WalletModel value) {
+    _$walletAtom.reportWrite(value, super.wallet, () {
+      super.wallet = value;
+    });
+  }
+
+  late final _$getTransactionsAsyncAction =
+      AsyncAction('_FinancialControllerBase.getTransactions', context: context);
+
+  @override
+  Future getTransactions() {
+    return _$getTransactionsAsyncAction.run(() => super.getTransactions());
+  }
+
   late final _$_FinancialControllerBaseActionController =
       ActionController(name: '_FinancialControllerBase', context: context);
 
@@ -59,7 +83,8 @@ mixin _$FinancialController on _FinancialControllerBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
-transactions: ${transactions}
+transactions: ${transactions},
+wallet: ${wallet}
     ''';
   }
 }

@@ -1,6 +1,8 @@
 import 'package:gerenciamento_pessoal_mobile/models/shopping_list_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/tasks_model.dart';
+import 'package:gerenciamento_pessoal_mobile/models/transactions_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/user_model.dart';
+import 'package:gerenciamento_pessoal_mobile/models/wallet.dart';
 import 'package:get_it/get_it.dart';
 
 import '../provider/global_request.dart';
@@ -32,9 +34,7 @@ class GlobalApi {
     List<ShoppingListModel> shoppingListModel = [];
 
     var ret = await provider.sendGet("shopping_lists");
-    // debugPrint('-------------------');
-    // debugPrint(ret.toString());W
-    // debugPrint('-------------------');
+
     if (ret != false) {
       ret.forEach((e) => shoppingListModel.add(ShoppingListModel.fromJson(e)));
     }
@@ -104,4 +104,55 @@ class GlobalApi {
   }
 
   //Financial Management
+  Future<List<TransactionModel>> getTransactions() async {
+    List<TransactionModel> transactions = [];
+
+    var ret = await provider.sendGet("transactions");
+
+    if (ret != false) {
+      ret.forEach((e) => transactions.add(TransactionModel.fromJson(e)));
+    }
+
+    return transactions;
+  }
+
+  Future<bool> deleteTransactions(int id) async {
+    var ret = await provider.sendDelete("transactions/$id");
+
+    return ret != false;
+
+  }
+
+  Future<bool> updateTransactions(int id, data) async {
+    var ret = await provider.sendPut("transactions/$id", data, "update");
+
+    return ret != false;
+  }
+
+  createTransactions(data) async {
+    var ret = await provider.sendPost("transactions", data, "create");
+    TransactionModel transaction = TransactionModel();
+
+
+    if( ret != false) {
+      transaction = TransactionModel.fromJson(ret);
+      return transaction;
+    }
+
+    return false;
+
+  }
+
+  getWallet() async {
+    WalletModel wallet = WalletModel();
+
+    var ret = await provider.sendGet("wallet");
+
+    if (ret != false) {
+      wallet = WalletModel.fromJson(ret);
+      return wallet;
+    }
+
+    return false;
+  }
 }
