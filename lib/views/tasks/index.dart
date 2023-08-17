@@ -55,7 +55,7 @@ class _TasksScreenState extends State<TasksScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => const TasksForm())),
+            MaterialPageRoute(builder: (context) => const TasksForm(typeRequest: 'create',))),
           backgroundColor: GlobalColors.navy,
           elevation: 5,
           child: const Icon(Icons.add, color: Colors.white,),
@@ -106,7 +106,7 @@ class TasksElement extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => 
-              TasksForm(),));
+              TasksForm(typeRequest: 'update', task: task),));
           },
           child: Container(
             decoration: BoxDecoration(
@@ -117,7 +117,7 @@ class TasksElement extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(Icons.shopping_cart_rounded, color: GlobalColors.aqua,),
+                Icon(tasksController.getStatusIcon(task.status!), color: tasksController.getStatusColor(task.status!),),
                 Column(
                   children: [
                     Text(task.name ?? ''),

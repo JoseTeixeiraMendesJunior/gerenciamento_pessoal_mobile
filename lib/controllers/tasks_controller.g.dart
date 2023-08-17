@@ -53,8 +53,16 @@ mixin _$TasksController on _TasksControllerBase, Store {
       AsyncAction('_TasksControllerBase.createTask', context: context);
 
   @override
-  Future createTask(String method, {int? id}) {
-    return _$createTaskAsyncAction.run(() => super.createTask(method, id: id));
+  Future createTask() {
+    return _$createTaskAsyncAction.run(() => super.createTask());
+  }
+
+  late final _$updateTaskAsyncAction =
+      AsyncAction('_TasksControllerBase.updateTask', context: context);
+
+  @override
+  Future updateTask(int id) {
+    return _$updateTaskAsyncAction.run(() => super.updateTask(id));
   }
 
   late final _$removeShoppingListAsyncAction =

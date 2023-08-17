@@ -55,7 +55,7 @@ class _FinancialScreenState extends State<FinancialScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, 
             MaterialPageRoute(builder: (context) => TransactionForm(typeRequest: 'create',))),
-          backgroundColor: Colors.purple,
+          backgroundColor: GlobalColors.navy,
           elevation: 2,
           child: const Icon(Icons.add, color: Colors.white,),
           ),
@@ -100,11 +100,11 @@ class FinancialBody extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         child: Text.rich(
                           TextSpan(
-                            text: 'Total: ',
+                            text: 'Montante: ',
                             style: const TextStyle(color: Colors.white, fontSize: 28),
                             children: [
                               TextSpan(
-                                text: wallet.total.toString(),
+                                text: 'R\$ ${wallet.total}',
                               )
                             ]
                             

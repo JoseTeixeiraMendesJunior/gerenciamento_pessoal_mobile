@@ -42,17 +42,19 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
             fontFamily: 'Montserrat',
-            primaryColor: GlobalColors.maroon,
+            primaryColor: GlobalColors.navy,
             scaffoldBackgroundColor: GlobalColors.white,
             appBarTheme:
-                const AppBarTheme(backgroundColor: GlobalColors.maroon),
+                const AppBarTheme(backgroundColor: GlobalColors.navy, iconTheme: IconThemeData(color: Colors.white)),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                 textStyle:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 minimumSize: const Size(152, 56),
                 shape: const StadiumBorder(),
-                backgroundColor: GlobalColors.maroon,
+                backgroundColor: GlobalColors.navy,
+                foregroundColor: Colors.white,
+                surfaceTintColor: Colors.white,
                 padding: const EdgeInsets.all(16),
               ),
             ),

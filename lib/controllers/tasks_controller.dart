@@ -14,6 +14,9 @@ abstract class _TasksControllerBase with Store {
   TextEditingController name = TextEditingController();
   TextEditingController priority = TextEditingController();
   TextEditingController dueDate = TextEditingController();
+  TextEditingController description = TextEditingController();
+  TextEditingController status = TextEditingController();
+
 
   @observable
   bool isLoading = false;
@@ -33,23 +36,51 @@ abstract class _TasksControllerBase with Store {
   }
 
   @action
-  createTask(String method, {int? id}) async {
+  createTask() async {
     changeLoading(true);
     TasksModel data = TasksModel(
-      id: id,
       name: name.text,
       priority: priority.text,
       dueDate: dueDate.text,
+      description: description.text,
+      type: "only",
     );
     
     TasksModel res = await rep.createTasks(data.toJson());
 
     if(res.id != null ) {
-      tasks.insert(0, res);
+      print('oi');
+      tasks.add(res);
     }
     changeLoading(false);
 
     return res.id != null;
+  }
+
+    @action
+    updateTask(int id) async {
+      changeLoading(true);
+      TasksModel data = TasksModel(
+        id: id,
+        name: name.text,
+        priority: priority.text,
+        dueDate: dueDate.text,
+        description: description.text,
+        status: status.text,
+        type: "only",
+      );
+      
+      TasksModel res = await rep.updateTasks(id, data.toJson());
+
+      if(res.id != null) {
+        print('oi');
+        tasks.removeWhere((element) => element.id == data.id);
+        tasks.add(res);
+      }
+
+      changeLoading(false);
+
+      return res.id != null;
   }
 
   @action
@@ -59,5 +90,45 @@ abstract class _TasksControllerBase with Store {
     changeLoading(false);
     tasks.removeWhere((element) => element.id == id);
     return res;
+  }
+
+  disposeTransaction() {
+    name.clear();
+    description.clear();
+    dueDate.clear();
+    priority.clear();
+  }
+
+  withTransaction(TasksModel tasksModel) {
+    name.text = tasksModel.name ?? '';
+    description.text = tasksModel.description ?? '';
+    dueDate.text = tasksModel.dueDate ?? '';
+    priority.text = tasksModel.priority ?? '';
+  }
+
+  Color getStatusColor(String status) {
+    switch(status) {
+      case 'todo':
+        return Colors.grey;
+      case 'in_progress':
+        return Colors.amber;
+      case 'done':
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  IconData getStatusIcon(String status) {
+    switch(status) {
+      case 'todo':
+        return Icons.hourglass_empty_rounded;
+      case 'in_progress':
+        return Icons.note_alt;
+      case 'done':
+        return Icons.check_circle;
+      default:
+        return Icons.hourglass_empty_rounded;
+    }
   }
 }
