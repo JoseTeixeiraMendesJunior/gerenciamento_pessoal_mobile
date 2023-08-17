@@ -5,7 +5,7 @@ import 'package:gerenciamento_pessoal_mobile/models/transactions_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/wallet.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/global_colors.dart';
 import 'package:gerenciamento_pessoal_mobile/resources/widgets/globals.dart';
-import 'package:gerenciamento_pessoal_mobile/views/home/index.dart';
+import 'package:gerenciamento_pessoal_mobile/views/financial/form.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../resources/widgets/comuns.dart';
@@ -54,7 +54,7 @@ class _FinancialScreenState extends State<FinancialScreen> {
               ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => HomeScreen())), // MUDAR
+            MaterialPageRoute(builder: (context) => TransactionForm(typeRequest: 'create',))),
           backgroundColor: Colors.purple,
           elevation: 2,
           child: const Icon(Icons.add, color: Colors.white,),
@@ -175,8 +175,8 @@ class TransactionElement extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: InkWell(
           onTap: () {
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => 
-            //   ShoppingListView(shoppingList: shoppingItem),));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => 
+              TransactionForm(trasaction: transation, typeRequest: 'update',),));
           },
           child: Container(
             padding: const EdgeInsets.all(8),
@@ -215,7 +215,7 @@ class TransactionElement extends StatelessWidget {
                         text: 'R\$ ',
                         children: [
                           TextSpan(
-                            text: transation.amount,
+                            text: transation.amount.toString(),
                             style: const TextStyle(fontWeight: FontWeight.bold)
                           )
                         ] 

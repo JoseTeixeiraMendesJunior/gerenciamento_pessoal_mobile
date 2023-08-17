@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/models/transactions_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/wallet.dart';
@@ -34,7 +32,7 @@ abstract class _FinancialControllerBase with Store {
   @observable
   WalletModel wallet = WalletModel();
 
-  @action
+   @action
   getTransactions() async {
     changeLoading(true);
     List<TransactionModel> temp = await rep.getTransactions();
@@ -54,7 +52,7 @@ abstract class _FinancialControllerBase with Store {
     if(res == true) {
       WalletModel temp = wallet;
 
-      int index = transactions.indexOf((element) => element.id == id);
+      int index = transactions.indexWhere((element) => element.id == id);
 
       if(transactions[index].type == 'income') {
         temp.income = temp.income! - transactions[index].amount!;
@@ -62,7 +60,7 @@ abstract class _FinancialControllerBase with Store {
         temp.expense = temp.expense! - transactions[index].amount!;
       }
 
-      temp.total = temp.income! + temp.expense!;
+      temp.total = temp.income! - temp.expense!;
       wallet = temp;
 
       transactions.removeWhere((element) => element.id == id);
@@ -81,15 +79,76 @@ abstract class _FinancialControllerBase with Store {
       date: date.text,
     );
 
-    TransactionModel res = await rep.createTransactions(data);
+    TransactionModel res = await rep.createTransactions(data.toJson());
 
     if(res.id != null) {
-      transactions.insert(0, res);
+      WalletModel temp = wallet;
+
+      if(res.type == 'income') {
+        temp.income = temp.income! + res.amount!;
+      } else {
+        temp.expense = temp.expense! + res.amount!;
+      }
+
+      temp.total = temp.income! - temp.expense!;
+      wallet = temp;
+
+      transactions.add(res);
     }
 
     changeLoading(false);
 
     return res.id != null;
+  }
+
+  @action
+  updateTransaction(int id) async {
+    changeLoading(true);
+    TransactionModel data = TransactionModel(
+      amount: double.parse(amount.text),
+      description: description.text,
+      type: type.text,
+      category: category.text,
+      date: date.text,
+    );
+
+    TransactionModel res = await rep.updateTransactions(id, data.toJson());
+
+    if(res.id != null) {
+      WalletModel temp = wallet;
+
+      if(res.type == 'income') {
+        temp.income = temp.income! + res.amount!;
+      } else {
+        temp.expense = temp.expense! + res.amount!;
+      }
+
+      temp.total = temp.income! - temp.expense!;
+      wallet = temp;
+
+      transactions.removeWhere((element) => element.id == data.id);
+      transactions.add(res);
+    }
+
+    changeLoading(false);
+
+    return res.id != null;
+  }
+
+  disposeTransaction() {
+    amount.clear();
+    description.clear();
+    date.clear();
+    type.clear();
+    category.clear();
+  }
+
+  withTransaction(TransactionModel transactionModel) {
+    amount.text = transactionModel.amount.toString();
+    description.text = transactionModel.description ?? '';
+    date.text = transactionModel.date ?? '';
+    type.text = transactionModel.type ?? '';
+    category.text = transactionModel.category ?? '';
   }
 
 }

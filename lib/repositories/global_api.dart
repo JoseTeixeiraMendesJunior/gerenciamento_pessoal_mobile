@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gerenciamento_pessoal_mobile/models/shopping_list_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/tasks_model.dart';
 import 'package:gerenciamento_pessoal_mobile/models/transactions_model.dart';
@@ -126,11 +127,18 @@ class GlobalApi {
 
   }
 
-  Future<bool> updateTransactions(int id, data) async {
+  Future<TransactionModel> updateTransactions(int id, data) async {
+    debugPrint(data.toString());
     var ret = await provider.sendPut("transactions/$id", data, "update");
 
-    return ret != false;
-  }
+    TransactionModel transaction = TransactionModel();
+
+
+    if( ret != false) {
+      transaction = TransactionModel.fromJson(ret);
+    }
+
+    return transaction;  }
 
   Future<TransactionModel>createTransactions(data) async {
     var ret = await provider.sendPost("transactions", data, "create");
