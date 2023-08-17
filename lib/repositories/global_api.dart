@@ -94,17 +94,30 @@ class GlobalApi {
 
   }
 
-  Future<bool> updateTasks(int id, data) async {
+  Future<TasksModel> updateTasks(int id, data) async {
     var ret = await provider.sendPut("tasks/$id", data, "update");
 
-    return ret != false;
+    TasksModel task = TasksModel();
+
+
+    if( ret != false) {
+      task = TasksModel.fromJson(ret);
+    }
+
+    return task;  
   }
 
-  Future<bool> createTasks(int id, data) async {
+  Future<TasksModel> createTasks(data) async {
     var ret = await provider.sendPost("tasks", data, "create");
 
-    return ret != false;
+    TasksModel task = TasksModel();
 
+
+    if( ret != false) {
+      task = TasksModel.fromJson(ret);
+    }
+
+    return task;
   }
 
   //Financial Management

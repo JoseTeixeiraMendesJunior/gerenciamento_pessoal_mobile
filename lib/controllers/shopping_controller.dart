@@ -40,8 +40,6 @@ abstract class _ShoppingControllerBase with Store {
 
     itemName.clear();
     itemQuantity.clear();
-    // itemName.text = '';
-    // itemQuantity.text = '';
   }
 
   @action

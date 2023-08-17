@@ -3,9 +3,6 @@ class TasksModel {
   String? dueDate;
   String? priority;
   String? type;
-  int? userId;
-  String? updatedAt;
-  String? createdAt;
   int? id;
 
   TasksModel(
@@ -13,9 +10,6 @@ class TasksModel {
       this.dueDate,
       this.priority,
       this.type,
-      this.userId,
-      this.updatedAt,
-      this.createdAt,
       this.id});
 
   TasksModel.fromJson(Map<String, dynamic> json) {
@@ -23,9 +17,6 @@ class TasksModel {
     dueDate = json['due_date'];
     priority = json['priority'];
     type = json['type'];
-    userId = json['user_id'];
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
     id = json['id'];
   }
 
@@ -35,9 +26,6 @@ class TasksModel {
     data['due_date'] = dueDate;
     data['priority'] = priority;
     data['type'] = type;
-    data['user_id'] = userId;
-    data['updated_at'] = updatedAt;
-    data['created_at'] = createdAt;
     data['id'] = id;
     return data;
   }
